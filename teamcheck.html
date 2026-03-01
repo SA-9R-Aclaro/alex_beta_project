@@ -1,0 +1,285 @@
+<html>
+    <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Team Checker</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    :root{
+        --yellow: gold;
+    }
+
+    body{
+        font-family: 'Trebuchet MS', 'Lucida Grande', sans-serif;
+        background-image: 
+            linear-gradient(45deg, gold 25%, transparent 25%, transparent 75%, gold 75%, gold),
+            linear-gradient(45deg, gold 25%, transparent 25%, transparent 75%, gold 75%, gold),
+            linear-gradient(90deg, orangered 0%, gold 50%, orangered 100%);
+        background-size: 80px 80px, 80px 80px, 100%;
+        background-position: 0 0, 40px 40px, 0 0;
+        background-color: gold;
+        background-attachment: fixed;
+        margin: 0;
+    }
+
+    .navbar{
+        background-color: var(--yellow);
+    }
+
+    .brand-box{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: black;
+    }
+
+    .brand-box img{
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .nav-link{
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-link:hover{
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .main-container{
+        max-width: 500px;
+        margin: 120px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+
+    h2{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .subtitle{
+        text-align: center;
+        margin-bottom: 25px;
+        color: #555;
+    }
+
+    .form-select{
+        border-radius: 8px;
+    }
+
+    .form-select:focus{
+        border-color: var(--yellow);
+        box-shadow: 0 0 5px rgba(238,211,43,0.5);
+    }
+
+    .option-group{
+        margin-top: 8px;
+    }
+
+    .option-group input{
+        display: none;
+    }
+
+    .option-group span{
+        padding: 8px 16px;
+        border-radius: 20px;
+        margin-right: 8px;
+        cursor: pointer;
+        background: #ddd;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+
+    .option-group input:checked + span{
+        background: var(--yellow);
+        color: black;
+        font-weight: bold;
+    }
+
+    .check-btn{
+        width: 100%;
+        margin-top: 25px;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: var(--yellow);
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .check-btn:hover{
+        background: #d1b824;
+        transform: scale(1.05);
+    }
+
+    #result{
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .team-name{
+        font-size: 18px;
+        margin-top: 8px;
+    }
+
+    .team-img{
+        margin-top: 10px;
+        max-width: 150px;
+        border-radius: 10px;
+    }
+
+    #teamImage img{
+        display: flex;
+        justify-content: center;
+        margin: 10px auto 0;
+    }
+    </style>
+    </head>
+
+    <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <div class="container-fluid">
+    <div class="brand-box">
+    <a href="index.html" class="navbar-brand">
+    <img src="Logo.png" alt="Home">
+    </a>
+    <span>Intramurals SY 25-26</span>
+    </div>
+    <ul class="navbar-nav ms-auto">
+    <li class="nav-item"><a class="nav-link" href="index.html">Sign Up</a></li>
+    <li class="nav-item"><a class="nav-link" href="teamcheck.html">Team Checker</a></li>
+    <li class="nav-item"><a class="nav-link" href="players.html">Players</a></li>
+    </ul>
+    </div>
+    </nav>
+
+    <div class="container">
+    <div class="main-container">
+
+    <h2>Team Checker</h2>
+    <div class="subtitle">Find Your Official Intramurals Team</div>
+
+    <div class="mb-3">
+    <label class="form-label">Grade Level</label>
+    <select id="level" class="form-select">
+    <option value="7">Grade 7</option>
+    <option value="8">Grade 8</option>
+    <option value="9">Grade 9</option>
+    <option value="10">Grade 10</option>
+    </select>
+    </div>
+
+    <div class="mb-3">
+    <label class="form-label">Section</label>
+    <select id="section" class="form-select">
+    <option value="ruby">Ruby</option>
+    <option value="emerald">Emerald</option>
+    </select>
+    </div>
+
+    <div class="mb-3">
+    <label class="form-label">Registered</label>
+    <div class="option-group">
+    <label><input type="radio" name="reg" value="yes"><span>YES</span></label>
+    <label><input type="radio" name="reg" value="no"><span>NO</span></label>
+    </div>
+    </div>
+
+    <div class="mb-3">
+    <label class="form-label">Medical Clearance</label>
+    <div class="option-group">
+    <label><input type="radio" name="med" value="yes"><span>YES</span></label>
+    <label><input type="radio" name="med" value="no"><span>NO</span></label>
+    </div>
+    </div>
+
+    <button class="check-btn" onclick="checkTeam()">Check Eligibility</button>
+
+    <div id="result"></div>
+    <div id="teamImage"></div>
+
+    </div>
+    </div>
+
+    <script>
+    function checkTeam(){
+        let level = document.getElementById("level").value;
+        let section = document.getElementById("section").value;
+        let reg = document.querySelector('input[name="reg"]:checked');
+        let med = document.querySelector('input[name="med"]:checked');
+        let result = document.getElementById("result");
+        let imgDiv = document.getElementById("teamImage");
+
+        result.innerHTML = "";
+        imgDiv.innerHTML = "";
+
+        if(!reg || !med){
+            result.innerHTML = "❌ Please complete all fields.";
+            return;
+        }
+
+        if(reg.value != "yes" || med.value != "yes"){
+            result.innerHTML = "❌ You are NOT eligible for Intramurals.";
+            return;
+        }
+
+        let team = "";
+        let color = "black";
+        let imgSrc = "";
+
+        <!-- Team logic -->
+
+        if((level == "7" && section == "ruby") || (level == "10" && section == "ruby")){
+            team = "Yellow Tigers 🐯";
+            color = "#ffd400";
+            imgSrc = "yellow_tigers.jpg";
+        }
+        else if((level == "7" && section == "emerald") || (level == "10" && section == "emerald")){
+            team = "Green Hornets 🐝";
+            color = "#00b140";
+            imgSrc = "green_hornets.jpg";
+        }
+        else if((level == "8" || level == "9") && section == "ruby"){
+            team = "Blue Bears 🐻";
+            color = "#007bff";
+            imgSrc = "blue_bears.jpg";
+        }
+        else if((level == "8" || level == "9") && section == "emerald"){
+            team = "Red Bulldogs 🐶";
+            color = "#dc3545";
+            imgSrc = "red_bulldogs.jpg";
+        }
+        else{
+            team = "No Team Assigned.";
+            color = "black";
+            imgSrc = "";
+        }
+
+        result.innerHTML = `
+            ✅ ELIGIBLE!<br>
+            <div class="team-name" style="color: ${color};">${team}</div>
+        `;
+
+        if(imgSrc !== ""){
+            imgDiv.innerHTML = `<img src="${imgSrc}" class="team-img" alt="${team}">`;
+        }
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,225 @@
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Sign Up</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            body {
+                font-family: 'Trebuchet MS', 'Lucida Grande', sans-serif;
+                background-image: 
+                    linear-gradient(45deg, gold 25%, transparent 25%, transparent 75%, gold 75%, gold),
+                    linear-gradient(45deg, gold 25%, transparent 25%, transparent 75%, gold 75%, gold),
+                    linear-gradient(90deg, orangered 0%, gold 50%, orangered 100%);
+                background-size: 80px 80px, 80px 80px, 100%;
+                background-position: 0 0, 40px 40px, 0 0;
+                background-color: gold;
+                background-attachment: fixed;
+            }
+
+            h2 {
+                font-family: 'Georgia', serif;
+                color: darkorange;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+
+            .navbar {
+                background-color: gold;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            .brand-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: bold;
+                font-size: 1.4rem;
+                color: darkblue;
+                font-family: 'Georgia', serif;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-link {
+                transition: all 0.3s ease-in-out;
+                color: darkblue !important;
+                font-weight: 600;
+                font-size: 1.05rem;
+            }
+
+            .nav-link:hover {
+                color: orangered !important;
+                font-size: 1.15rem;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+
+            .signup-container {
+                max-width: 500px;
+                margin: 100px auto;
+                padding: 30px;
+                background: linear-gradient(135deg, lightyellow 0%, white 100%);
+                border-radius: 15px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                border: 3px solid gold;
+            }
+
+            .form-label {
+                font-weight: 600;
+                color: darkblue;
+                font-family: 'Trebuchet MS', sans-serif;
+            }
+
+            .btn-primary {
+                background-color: orangered;
+                border: 2px solid darkblue;
+                color: white;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+
+            .btn-primary:hover {
+                background-color: darkorange;
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(255, 69, 0, 0.4);
+            }
+
+            .form-control {
+                border: 2px solid gold;
+                border-radius: 8px;
+            }
+
+            .form-control:focus {
+                border-color: orangered;
+                box-shadow: 0 0 8px gold;
+            }
+
+            .error-text {
+                font-size: 0.9rem;
+                color: red;
+                display: none;
+                font-weight: 600;
+            }
+
+            .success-text {
+                font-size: 0.9rem;
+                color: forestgreen;
+                display: none;
+                font-weight: 600;
+            }
+
+            .brand-box img {
+                height: 40px;
+                cursor: pointer;
+                filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+            }
+        </style>
+    </head>
+    <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container-fluid">
+            <div class="brand-box">
+                <a href="index.html" class="navbar-brand">
+                     <img src="Logo.png" alt="Home">
+                </a>
+                <span>Intramurals SY 25-26</span>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="teamcheck.html">Team Checker</a></li>
+                <li class="nav-item"><a class="nav-link" href="players.html">Players</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <br><br><br>
+
+    <!-- Sign up  -->
+    <div class="container">
+        <div class="signup-container">
+            <h2 class="text-center">Create an Account</h2>
+
+            <form onsubmit="return validatePassword()">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+
+                    <div id="passwordError" class="error-text">
+                        Password must contain at least one number and one symbol.
+                    </div>
+                    <div id="passwordSuccess" class="success-text">
+                        Password looks good!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="login.html">Log in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    function validatePassword() {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        const error = document.getElementById("passwordError");
+        const success = document.getElementById("passwordSuccess");
+
+        <!-- Password needs, HAHAHA OA, may specifications pa yung pass hehehe siorry maem -alex -->
+
+        const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])/;
+
+        if (!regex.test(password)) {
+            error.textContent = "Password must contain at least one number and one symbol.";
+            error.style.display = "block";
+            success.style.display = "none";
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            error.textContent = "Passwords do not match.";
+            error.style.display = "block";
+            success.style.display = "none";
+            return false;
+        }
+
+        error.style.display = "none";
+        success.style.display = "block";
+
+        setTimeout(function() {
+            window.location.href = "teamcheck.html";
+        }, 1000);
+
+        return false;
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
